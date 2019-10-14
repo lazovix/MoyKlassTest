@@ -44,7 +44,7 @@ const rootSchema = Joi.object({
         }
     }, 'custom split number').default(null),
     studentsCount: Joi.any().custom((value, helpers) => {
-        const validate = Joi.array().items(Joi.number().integer()).max(2).validate(String(value).split(',').map(v => Number.parseInt(v)));
+        const validate = Joi.array().items(Joi.number().integer()).max(2).validate(String(value).split(',').map(v => Number(v)));
         if (validate.error) {
             throw new Error(validate.error.message);
         } else {
