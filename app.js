@@ -105,6 +105,8 @@ router.all('/', async (ctx, next) => {
           (:status::INT IS NULL OR les.status = :status::INT)
           AND
           (:studentsCount::INT[] IS NULL OR stus."studentsCount" BETWEEN (:studentsCount::INT[])[1] AND COALESCE((:studentsCount::INT[])[2], (:studentsCount::INT[])[1]))
+          AND
+          (NOT :teacherIds::INT[] IS NULL AND NOT teas IS NULL)
         ORDER BY
           les.date
         OFFSET (:lessonsPerPage::INT * (:page::INT - 1))
